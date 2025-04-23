@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Artworks</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      color: #fff;
+      background: url('logobg.png') no-repeat center center fixed;
+      background-size: cover;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+      overflow-x: hidden;
+    }
+
+    .logo-overlay {
+      position: fixed;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 1000;
+      pointer-events: none;
+    }
+
+    .logo-overlay img {
+      height: 80px; /* Mărimea logo-ului mai mică */
+      opacity: 0.9;
+    }
+
+    /* Home Button */
+    .home-button {
+      position: fixed;
+      top: 30px;
+      left: 30px;
+      z-index: 1000;
+      background: none;
+      border: none;
+      cursor: pointer;
+      transition: transform 0.3s ease, opacity 0.5s ease;
+    }
+
+    .home-button:hover {
+      transform: scale(1.2);
+      opacity: 0.7;
+    }
+
+    .home-button svg {
+      width: 40px;
+      height: 40px;
+      fill: #ffffff;
+      filter: drop-shadow(0 0 5px lime);
+      transition: filter 0.3s ease;
+    }
+
+    /* Animație de dispariție pentru Home Button */
+    .home-button.disappear {
+      animation: fadeOut 0.5s forwards;
+    }
+
+    @keyframes fadeOut {
+      0% {
+        opacity: 1;
+        transform: scale(1);
+      }
+      100% {
+        opacity: 0;
+        transform: scale(0.5);
+      }
+    }
+
+    /* Container și imagini pentru Artworks */
+    .container {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      width: 100%;
+      max-width: 1400px;
+      margin-bottom: 60px;
+      flex-wrap: wrap;
+    }
+
+    .image-container {
+      flex: 1;
+      min-width: 300px;
+      max-width: 32%;
+      height: 600px;
+      overflow: hidden;
+      position: relative;
+      border-radius: 10px;
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      box-shadow: 0 0 60px rgba(0, 0, 0, 0.9);
+    }
+
+    .image-container img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      border: none;
+      filter: drop-shadow(0 0 40px rgba(0, 0, 0, 0.8));
+      transition: transform 0.3s ease;
+    }
+
+    .image-container img:hover {
+      transform: scale(1.05);
+    }
+
+    .lightbox {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: rgba(0, 0, 0, 0.8);
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+
+    .lightbox img {
+      max-width: 90%;
+      max-height: 90%;
+      object-fit: contain;
+    }
+
+    .lightbox.open {
+      display: flex;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Logo sus fix -->
+  <div class="logo-overlay">
+    <img src="transp.png" alt="Logo" />
+  </div>
+
+  <!-- Home Button -->
+  <button class="home-button" onclick="goHome()">
+    <svg viewBox="0 0 24 24">
+      <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
+    </svg>
+  </button>
+
+  <!-- Artworks -->
+  <div class="container">
+    <div class="image-container" onclick="openLightbox('mgkart.png')">
+      <img src="mgkart.png" alt="MGK Artwork">
+    </div>
+    <div class="image-container" onclick="openLightbox('nutuart.png')">
+      <img src="nutuart.png" alt="Nutuar Artwork">
+    </div>
+    <div class="image-container" onclick="openLightbox('markoart.png')">
+      <img src="markoart.png" alt="Marko Artwork">
+    </div>
+  </div>
+
+  <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+    <img id="lightboxImage" src="" alt="Full Image">
+  </div>
+
+  <script>
+    function openLightbox(imageSrc) {
+      const lightbox = document.getElementById('lightbox');
+      const lightboxImage = document.getElementById('lightboxImage');
+      lightboxImage.src = imageSrc;
+      lightbox.classList.add('open');
+    }
+
+    function closeLightbox() {
+      const lightbox = document.getElementById('lightbox');
+      lightbox.classList.remove('open');
+    }
+
+    // Funcție pentru Home button cu animație
+    function goHome() {
+      const homeButton = document.querySelector('.home-button');
+      homeButton.classList.add('disappear'); // Adaugă clasa de animație
+
+      setTimeout(() => {
+        window.location.href = 'index.html';  // Redirecționează după animație
+      }, 500);  // Timpul pentru animația de dispariție
+    }
+  </script>
+
+</body>
+</html>
