@@ -33,10 +33,11 @@
     }
 
     .logo-overlay img {
-      height: 80px;
+      height: 80px; /* Mărimea logo-ului mai mică */
       opacity: 0.9;
     }
 
+    /* Home Button */
     .home-button {
       position: fixed;
       top: 30px;
@@ -61,15 +62,23 @@
       transition: filter 0.3s ease;
     }
 
+    /* Animație de dispariție pentru Home Button */
     .home-button.disappear {
       animation: fadeOut 0.5s forwards;
     }
 
     @keyframes fadeOut {
-      0% { opacity: 1; transform: scale(1); }
-      100% { opacity: 0; transform: scale(0.5); }
+      0% {
+        opacity: 1;
+        transform: scale(1);
+      }
+      100% {
+        opacity: 0;
+        transform: scale(0.5);
+      }
     }
 
+    /* Container și imagini pentru Artworks */
     .container {
       display: flex;
       justify-content: center;
@@ -93,11 +102,6 @@
       justify-content: center;
       align-items: center;
       box-shadow: 0 0 60px rgba(0, 0, 0, 0.9);
-      transition: transform 0.4s ease;
-    }
-
-    .image-container:hover {
-      transform: scale(1.03);
     }
 
     .image-container img {
@@ -136,50 +140,23 @@
     .lightbox.open {
       display: flex;
     }
-
-    @media (max-width: 768px) {
-      .logo-overlay img {
-        height: 60px;
-      }
-
-      .home-button svg {
-        width: 30px;
-        height: 30px;
-      }
-
-      .container {
-        flex-direction: column;
-        align-items: center;
-        gap: 30px;
-      }
-
-      .image-container {
-        width: 90%;
-        max-width: 90%;
-        height: auto;
-        aspect-ratio: 1 / 1;
-      }
-
-      .image-container img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-      }
-    }
   </style>
 </head>
 <body>
 
+  <!-- Logo sus fix -->
   <div class="logo-overlay">
     <img src="transp.png" alt="Logo" />
   </div>
 
+  <!-- Home Button -->
   <button class="home-button" onclick="goHome()">
     <svg viewBox="0 0 24 24">
       <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
     </svg>
   </button>
 
+  <!-- Artworks -->
   <div class="container">
     <div class="image-container" onclick="openLightbox('mgkart.png')">
       <img src="mgkart.png" alt="MGK Artwork">
@@ -209,12 +186,14 @@
       lightbox.classList.remove('open');
     }
 
+    // Funcție pentru Home button cu animație
     function goHome() {
       const homeButton = document.querySelector('.home-button');
-      homeButton.classList.add('disappear');
+      homeButton.classList.add('disappear'); // Adaugă clasa de animație
+
       setTimeout(() => {
-        window.location.href = 'index.html';
-      }, 500);
+        window.location.href = 'index.html';  // Redirecționează după animație
+      }, 500);  // Timpul pentru animația de dispariție
     }
   </script>
 
